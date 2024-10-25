@@ -61,6 +61,36 @@
     .reset-button:hover {
       background-color: #45a049;
     }
+
+    .upgrades {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .upgrade {
+      margin: 10px 0;
+    }
+
+    .upgrade-button {
+      padding: 10px 20px;
+      font-size: 1em;
+      color: white;
+      background-color: #007bff; /* Blue */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .upgrade-button:hover {
+      background-color: #0056b3;
+    }
+
+    .upgrade-info {
+      margin-top: 5px;
+      font-size: 0.9em;
+      color: #555;
+    }
   </style>
 </head>
 
@@ -70,24 +100,80 @@
   <button class="click-button" id="clickButton">Paspausk čia!</button>
   <button class="reset-button" id="resetButton">Nustatyti</button>
 
+  <div class="upgrades">
+    <h2>Patobulinimai</h2>
+    <div class="upgrade">
+      <button class="upgrade-button" id="upgrade1">Pirkite +1 tašką per paspaudimą (kaina: <span id="upgrade1Cost">10</span>)</button>
+      <div class="upgrade-info">Kiekis: <span id="upgrade1Amount">0</span></div>
+    </div>
+    <div class="upgrade">
+      <button class="upgrade-button" id="upgrade2">Pirkite +5 taškų per sekundę (kaina: <span id="upgrade2Cost">50</span>)</button>
+      <div class="upgrade-info">Kiekis: <span id="upgrade2Amount">0</span></div>
+    </div>
+  </div>
+
   <script>
     let score = 0;
+    let pointsPerClick = 1;
+    let pointsPerSecond = 0;
+    let upgrade1Cost = 10;
+    let upgrade2Cost = 50;
 
     const scoreDisplay = document.getElementById('score');
     const clickButton = document.getElementById('clickButton');
     const resetButton = document.getElementById('resetButton');
+    const upgrade1Button = document.getElementById('upgrade1');
+    const upgrade2Button = document.getElementById('upgrade2');
+    const upgrade1AmountDisplay = document.getElementById('upgrade1Amount');
+    const upgrade2AmountDisplay = document.getElementById('upgrade2Amount');
+    const upgrade1CostDisplay = document.getElementById('upgrade1Cost');
+    const upgrade2CostDisplay = document.getElementById('upgrade2Cost');
 
     clickButton.addEventListener('click', () => {
-      score++;
+      score += pointsPerClick;
       scoreDisplay.textContent = score;
     });
 
     resetButton.addEventListener('click', () => {
       score = 0;
+      pointsPerClick = 1;
+      pointsPerSecond = 0;
+      upgrade1Cost = 10;
+      upgrade2Cost = 50;
       scoreDisplay.textContent = score;
+      upgrade1AmountDisplay.textContent = 0;
+      upgrade2AmountDisplay.textContent = 0;
+      upgrade1CostDisplay.textContent = upgrade1Cost;
+      upgrade2CostDisplay.textContent = upgrade2Cost;
     });
+
+    upgrade1Button.addEventListener('click', () => {
+      if (score >= upgrade1Cost) {
+        score -= upgrade1Cost;
+        pointsPerClick += 1;
+        upgrade1Cost = Math.floor(upgrade1Cost * 1.5);
+        upgrade1AmountDisplay.textContent = parseInt(upgrade1AmountDisplay.textContent) + 1;
+        scoreDisplay.textContent = score;
+        upgrade1CostDisplay.textContent = upgrade1Cost;
+      }
+    });
+
+    upgrade2Button.addEventListener('click', () => {
+      if (score >= upgrade2Cost) {
+        score -= upgrade2Cost;
+        pointsPerSecond += 5;
+        upgrade2Cost = Math.floor(upgrade2Cost * 1.5);
+        upgrade2AmountDisplay.textContent = parseInt(upgrade2AmountDisplay.textContent) + 1;
+        scoreDisplay.textContent = score;
+        upgrade2CostDisplay.textContent = upgrade2Cost;
+      }
+    });
+
+    setInterval(() => {
+      score += pointsPerSecond;
+      scoreDisplay.textContent = score;
+    }, 1000);
   </script>
 </body>
 
 </html>
-
