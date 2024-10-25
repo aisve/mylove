@@ -1,135 +1,58 @@
-/* Apply Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Open+Sans:wght@300&display=swap');
+<!DOCTYPE html>
+<html lang="lt">
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mano Meilei</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-body {
-    font-family: 'Open Sans', sans-serif;
-    color: #333;
-    background-color: #f8e8e8;
-}
+<body>
+  <div class="landing">
+    <h1>Sveika atvykusi į Paulinos stebuklų šalį!</h1>
+    <button onclick="scrollToSection('main-content')">Įeiti</button>
+  </div>
 
-h1, h2, p {
-    font-family: 'Dancing Script', cursive;
-    color: #ff6b6b;
-}
+  <div id="main-content">
+    <section class="gallery">
+      <h2>Mūsų Prisiminimai</h2>
+      <div class="photo-grid">
+        <img src="vienas.jpg" alt="Akimirka 1">
+        <img src="du.jpg" alt="Akimirka 2">
+        <img src="trys.jpg" alt="Akimirka 3">
+        <!-- Add more images as needed -->
+      </div>
+    </section>
 
-.landing {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-    background: linear-gradient(135deg, #ff6b6b, #ffe6e6);
-    animation: fadeIn 2s ease;
-}
+    <section class="love-notes">
+      <h2>Meilės Laiškai</h2>
+      <p>Brangi Paulina,</p>
+      <p>Why do I adore you?</p>
+      <ul>
+        <li>I am in love with your smile.</li>
+        <li>You sau cjut ai cant rahhhhhhhhh</li>
+        <li>You bring joy to my life, be taves it hard, ai cant live...</li>
+      </ul>
+    </section>
 
-.landing h1 {
-    font-size: 3.5em;
-    color: #ffffff;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
-}
+    <section class="about">
+      <h2>About youuuuuuuuuu</h2>
+      <p>You are veri veri prety, gorgeous, mai loveee, mai world, my sunshine. Nezinociau ka be taves darytii. YOURE MINE MF.</p>
+     
+    </section>
+  </div>
 
-.landing button {
-    padding: 12px 24px;
-    font-size: 1.2em;
-    background-color: #ff6b6b;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-family: 'Dancing Script', cursive;
-}
+  <footer>
+    <p>„Myliu tave labiau, nei gali išreikšti žodžiai.“</p>
+    <button>Jau tavęs pasiilgau</button>
+  </footer>
 
-.landing button:hover {
-    background-color: #ff4c4c;
-}
+  <script>
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({behavior: 'smooth'});
+    }
+  </script>
+</body>
 
-#main-content {
-    padding: 60px 10%;
-    animation: fadeIn 1s ease;
-}
-
-section {
-    margin: 60px 0;
-}
-
-section h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #ff6b6b;
-    text-align: center;
-}
-
-.gallery .photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    padding: 20px 0;
-}
-
-.gallery img {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-    border-radius: 15px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-}
-
-.gallery img:hover {
-    transform: scale(1.05);
-}
-
-.love-notes, .about {
-    background: #ffe6e6;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Dancing Script', cursive;
-}
-
-.love-notes p, .about p {
-    font-size: 1.4em;
-    margin-bottom: 15px;
-}
-
-footer {
-    text-align: center;
-    padding: 30px;
-    background-color: #ff6b6b;
-    color: #fff;
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.2em;
-}
-
-footer p {
-    margin-bottom: 10px;
-}
-
-footer button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #ff4c4c;
-    color: #fff;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: 'Dancing Script', cursive;
-}
-
-footer button:hover {
-    background-color: #ff2c2c;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+</html>can u make it prettier?
