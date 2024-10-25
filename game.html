@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html lang="lt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clicker Game</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Add inline styles for the game here */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f8ff; /* Light blue background */
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      color: #ff6b6b;
+      margin-bottom: 20px;
+    }
+
+    .score {
+      font-size: 2em;
+      margin: 20px 0;
+      color: #333;
+    }
+
+    .click-button {
+      padding: 20px 40px;
+      font-size: 1.5em;
+      color: white;
+      background-color: #ff6b6b;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .click-button:hover {
+      background-color: #ff4c4c;
+      transform: scale(1.05);
+    }
+
+    .reset-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #4caf50; /* Green */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .reset-button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Paspaudimų Žaidimas!</h1>
+  <div class="score">Taškai: <span id="score">0</span></div>
+  <button class="click-button" id="clickButton">Paspausk čia!</button>
+  <button class="reset-button" id="resetButton">Nustatyti</button>
+
+  <script>
+    let score = 0;
+
+    const scoreDisplay = document.getElementById('score');
+    const clickButton = document.getElementById('clickButton');
+    const resetButton = document.getElementById('resetButton');
+
+    clickButton.addEventListener('click', () => {
+      score++;
+      scoreDisplay.textContent = score;
+    });
+
+    resetButton.addEventListener('click', () => {
+      score = 0;
+      scoreDisplay.textContent = score;
+    });
+  </script>
+</body>
+
+</html>
 
