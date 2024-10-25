@@ -2,134 +2,189 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Open+Sans:wght@300&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
-    color: #333;
-    background-color: #f8e8e8;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  background-color: #f8e8e8;
 }
 
-h1, h2, p {
-    font-family: 'Dancing Script', cursive;
-    color: #ff6b6b;
+h1,
+h2,
+p {
+  font-family: 'Dancing Script', cursive;
+  color: #ff6b6b;
 }
 
 .landing {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-    background: linear-gradient(135deg, #ff6b6b, #ffe6e6);
-    animation: fadeIn 2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background: linear-gradient(135deg, #ff6b6b, #ffe6e6);
+  animation: fadeIn 2s ease;
 }
 
 .landing h1 {
-    font-size: 3.5em;
-    color: #ffffff;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+  font-size: 3.5em;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
 }
 
 .landing button {
-    padding: 12px 24px;
-    font-size: 1.2em;
-    background-color: #ff6b6b;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-family: 'Dancing Script', cursive;
+  padding: 12px 24px;
+  font-size: 1.2em;
+  background-color: #ff6b6b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: 'Dancing Script', cursive;
 }
 
 .landing button:hover {
-    background-color: #ff4c4c;
+  background-color: #ff4c4c;
 }
 
 #main-content {
-    padding: 60px 10%;
-    animation: fadeIn 1s ease;
+  padding: 60px 10%;
+  animation: fadeIn 1s ease;
 }
 
 section {
-    margin: 60px 0;
+  margin: 60px 0;
 }
 
 section h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #ff6b6b;
-    text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #ff6b6b;
+  text-align: center;
 }
 
 .gallery .photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    padding: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  padding: 20px 0;
 }
 
 .gallery img {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-    border-radius: 15px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
 }
 
 .gallery img:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
-.love-notes, .about {
-    background: #ffe6e6;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Dancing Script', cursive;
+.love-notes,
+.about {
+  background: #ffe6e6;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Dancing Script', cursive;
 }
 
-.love-notes p, .about p {
-    font-size: 1.4em;
-    margin-bottom: 15px;
+.love-notes p,
+.about p {
+  font-size: 1.4em;
+  margin-bottom: 15px;
 }
 
 footer {
-    text-align: center;
-    padding: 30px;
-    background-color: #ff6b6b;
-    color: #fff;
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.2em;
+  text-align: center;
+  padding: 30px;
+  background-color: #ff6b6b;
+  color: #fff;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2em;
 }
 
 footer p {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 footer button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #ff4c4c;
-    color: #fff;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: 'Dancing Script', cursive;
+  padding: 10px 20px;
+  border: none;
+  background-color: #ff4c4c;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Dancing Script', cursive;
 }
 
 footer button:hover {
-    background-color: #ff2c2c;
+  background-color: #ff2c2c;
+}
+
+/* Heart-shaped button styles */
+.heart-button {
+  display: inline-block;
+  width: 100px; /* Adjust size as needed */
+  height: 100px; /* Adjust size as needed */
+  background-color: #ff6b6b; /* Heart color */
+  color: white;
+  text-align: center;
+  line-height: 100px; /* Vertically center the text */
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none; /* Remove underline from link */
+  font-family: 'Dancing Script', cursive; /* Use the same font */
+  font-size: 1.2em;
+  transition: transform 0.3s; /* Animation on hover */
+}
+
+.heart-button:hover {
+  transform: scale(1.1); /* Scale up on hover */
+}
+
+.heart-button::before,
+.heart-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100px; /* Adjust size */
+  height: 100px; /* Adjust size */
+  background-color: #ff6b6b; /* Heart color */
+  border-radius: 50%;
+}
+
+.heart-button::before {
+  left: 50px; /* Adjust position */
+}
+
+.heart-button::after {
+  left: 0; /* Adjust position */
+}
+
+.heart-button span {
+  position: relative;
+  z-index: 1; /* Bring text above the heart shape */
 }
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
