@@ -5,113 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clicker Game</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Add inline styles for the game here */
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #f0f8ff; /* Light blue background */
-      font-family: 'Open Sans', sans-serif;
-      text-align: center;
-    }
-
-    h1 {
-      font-family: 'Dancing Script', cursive;
-      color: #ff6b6b;
-      margin-bottom: 20px;
-    }
-
-    .score {
-      font-size: 2.5em;
-      margin: 20px 0;
-      color: #333;
-    }
-
-    .click-button {
-      padding: 20px 40px;
-      font-size: 2em;
-      color: white;
-      background-color: #ff6b6b;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .click-button:hover {
-      background-color: #ff4c4c;
-      transform: scale(1.05);
-    }
-
-    .reset-button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 1em;
-      background-color: #4caf50; /* Green */
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .reset-button:hover {
-      background-color: #45a049;
-    }
-
-    .upgrades {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 40px;
-      width: 100%;
-      max-width: 600px;
-    }
-
-    .upgrade {
-      margin: 10px 0;
-      width: 100%;
-      max-width: 400px;
-    }
-
-    .upgrade-button {
-      padding: 10px 20px;
-      font-size: 1em;
-      color: white;
-      background-color: #007bff; /* Blue */
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      width: 100%;
-    }
-
-    .upgrade-button:hover {
-      background-color: #0056b3;
-    }
-
-    .upgrade-info {
-      margin-top: 5px;
-      font-size: 0.9em;
-      color: #555;
-    }
-
-    /* New styles for a more Cookie Clicker-like layout */
-    .container {
-      background-color: #fff;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      width: 90%;
-      max-width: 600px;
-      margin: 20px auto;
-    }
-  </style>
+  <link rel="stylesheet" href="game-styles.css"> <!-- Updated link -->
 </head>
 
 <body>
@@ -135,11 +29,11 @@
   </div>
 
   <script>
-    let score = 0;
-    let pointsPerClick = 1;
-    let pointsPerSecond = 0;
-    let upgrade1Cost = 10;
-    let upgrade2Cost = 50;
+    let score = parseInt(localStorage.getItem('score')) || 0;
+    let pointsPerClick = parseInt(localStorage.getItem('pointsPerClick')) || 1;
+    let pointsPerSecond = parseInt(localStorage.getItem('pointsPerSecond')) || 0;
+    let upgrade1Cost = parseInt(localStorage.getItem('upgrade1Cost')) || 10;
+    let upgrade2Cost = parseInt(localStorage.getItem('upgrade2Cost')) || 50;
 
     const scoreDisplay = document.getElementById('score');
     const clickButton = document.getElementById('clickButton');
@@ -151,9 +45,19 @@
     const upgrade1CostDisplay = document.getElementById('upgrade1Cost');
     const upgrade2CostDisplay = document.getElementById('upgrade2Cost');
 
+    // Load the game state from localStorage
+    function loadGame() {
+      scoreDisplay.textContent = score;
+      upgrade1AmountDisplay.textContent = localStorage.getItem('upgrade1Amount') || 0;
+      upgrade2AmountDisplay.textContent = localStorage.getItem('upgrade2Amount') || 0;
+      upgrade1CostDisplay.textContent = upgrade1Cost;
+      upgrade2CostDisplay.textContent = upgrade2Cost;
+    }
+
     clickButton.addEventListener('click', () => {
       score += pointsPerClick;
       scoreDisplay.textContent = score;
+      localStorage.setItem('score', score);
     });
 
     resetButton.addEventListener('click', () => {
@@ -162,11 +66,8 @@
       pointsPerSecond = 0;
       upgrade1Cost = 10;
       upgrade2Cost = 50;
-      scoreDisplay.textContent = score;
-      upgrade1AmountDisplay.textContent = 0;
-      upgrade2AmountDisplay.textContent = 0;
-      upgrade1CostDisplay.textContent = upgrade1Cost;
-      upgrade2CostDisplay.textContent = upgrade2Cost;
+      localStorage.clear(); // Clear all saved data
+      loadGame();
     });
 
     upgrade1Button.addEventListener('click', () => {
@@ -174,9 +75,13 @@
         score -= upgrade1Cost;
         pointsPerClick += 1;
         upgrade1Cost = Math.floor(upgrade1Cost * 1.5);
+        localStorage.setItem('score', score);
+        localStorage.setItem('pointsPerClick', pointsPerClick);
+        localStorage.setItem('upgrade1Cost', upgrade1Cost);
         upgrade1AmountDisplay.textContent = parseInt(upgrade1AmountDisplay.textContent) + 1;
         scoreDisplay.textContent = score;
         upgrade1CostDisplay.textContent = upgrade1Cost;
+        localStorage.setItem('upgrade1Amount', upgrade1AmountDisplay.textContent);
       }
     });
 
@@ -185,16 +90,24 @@
         score -= upgrade2Cost;
         pointsPerSecond += 5;
         upgrade2Cost = Math.floor(upgrade2Cost * 1.5);
+        localStorage.setItem('score', score);
+        localStorage.setItem('pointsPerSecond', pointsPerSecond);
+        localStorage.setItem('upgrade2Cost', upgrade2Cost);
         upgrade2AmountDisplay.textContent = parseInt(upgrade2AmountDisplay.textContent) + 1;
         scoreDisplay.textContent = score;
         upgrade2CostDisplay.textContent = upgrade2Cost;
+        localStorage.setItem('upgrade2Amount', upgrade2AmountDisplay.textContent);
       }
     });
 
     setInterval(() => {
       score += pointsPerSecond;
       scoreDisplay.textContent = score;
+      localStorage.setItem('score', score); // Update score in localStorage
     }, 1000);
+
+    // Call loadGame to initialize the game state
+    loadGame();
   </script>
 </body>
 
