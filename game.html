@@ -5,25 +5,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clicker Game</title>
-  <link rel="stylesheet" href="game-styles.css"> <!-- Updated link -->
+  <link rel="stylesheet" href="game-styles.css"> <!-- Link to external CSS for styling -->
 </head>
 
 <body>
   <div class="container">
-    <h1>Clicker Game!</h1>
-    <div class="score">Score: <span id="score">0</span></div>
-    <button class="click-button" id="clickButton">Click Here!</button>
-    <button class="reset-button" id="resetButton">Reset</button>
+    <div class="main-area">
+      <h1>Clicker Game!</h1>
+      <div class="score">Score: <span id="score">0</span></div>
+      <button class="click-button" id="clickButton">Click Here!</button>
+    </div>
 
-    <div class="upgrades">
+    <div class="upgrades-area">
       <h2>Upgrades</h2>
       <div class="upgrade">
-        <button class="upgrade-button" id="upgrade1">Buy +1 point per click (cost: <span id="upgrade1Cost">10</span>)</button>
-        <div class="upgrade-info">Quantity: <span id="upgrade1Amount">0</span></div>
+        <button class="upgrade-button" id="upgrade1">+1 point per click (Cost: <span id="upgrade1Cost">10</span>)</button>
+        <div class="upgrade-info">Owned: <span id="upgrade1Amount">0</span></div>
       </div>
       <div class="upgrade">
-        <button class="upgrade-button" id="upgrade2">Buy +5 points per second (cost: <span id="upgrade2Cost">50</span>)</button>
-        <div class="upgrade-info">Quantity: <span id="upgrade2Amount">0</span></div>
+        <button class="upgrade-button" id="upgrade2">+5 points per second (Cost: <span id="upgrade2Cost">50</span>)</button>
+        <div class="upgrade-info">Owned: <span id="upgrade2Amount">0</span></div>
+      </div>
+      <div class="upgrade">
+        <button class="upgrade-button" id="upgrade3">+10 points per click (Cost: <span id="upgrade3Cost">100</span>)</button>
+        <div class="upgrade-info">Owned: <span id="upgrade3Amount">0</span></div>
+      </div>
+      <div class="upgrade">
+        <button class="upgrade-button" id="upgrade4">+25 points per second (Cost: <span id="upgrade4Cost">250</span>)</button>
+        <div class="upgrade-info">Owned: <span id="upgrade4Amount">0</span></div>
       </div>
     </div>
   </div>
@@ -34,24 +43,36 @@
     let pointsPerSecond = parseInt(localStorage.getItem('pointsPerSecond')) || 0;
     let upgrade1Cost = parseInt(localStorage.getItem('upgrade1Cost')) || 10;
     let upgrade2Cost = parseInt(localStorage.getItem('upgrade2Cost')) || 50;
+    let upgrade3Cost = parseInt(localStorage.getItem('upgrade3Cost')) || 100;
+    let upgrade4Cost = parseInt(localStorage.getItem('upgrade4Cost')) || 250;
 
     const scoreDisplay = document.getElementById('score');
     const clickButton = document.getElementById('clickButton');
-    const resetButton = document.getElementById('resetButton');
     const upgrade1Button = document.getElementById('upgrade1');
     const upgrade2Button = document.getElementById('upgrade2');
+    const upgrade3Button = document.getElementById('upgrade3');
+    const upgrade4Button = document.getElementById('upgrade4');
+
+    // Display elements for upgrades
     const upgrade1AmountDisplay = document.getElementById('upgrade1Amount');
     const upgrade2AmountDisplay = document.getElementById('upgrade2Amount');
+    const upgrade3AmountDisplay = document.getElementById('upgrade3Amount');
+    const upgrade4AmountDisplay = document.getElementById('upgrade4Amount');
     const upgrade1CostDisplay = document.getElementById('upgrade1Cost');
     const upgrade2CostDisplay = document.getElementById('upgrade2Cost');
+    const upgrade3CostDisplay = document.getElementById('upgrade3Cost');
+    const upgrade4CostDisplay = document.getElementById('upgrade4Cost');
 
-    // Load the game state from localStorage
     function loadGame() {
       scoreDisplay.textContent = score;
       upgrade1AmountDisplay.textContent = localStorage.getItem('upgrade1Amount') || 0;
       upgrade2AmountDisplay.textContent = localStorage.getItem('upgrade2Amount') || 0;
+      upgrade3AmountDisplay.textContent = localStorage.getItem('upgrade3Amount') || 0;
+      upgrade4AmountDisplay.textContent = localStorage.getItem('upgrade4Amount') || 0;
       upgrade1CostDisplay.textContent = upgrade1Cost;
       upgrade2CostDisplay.textContent = upgrade2Cost;
+      upgrade3CostDisplay.textContent = upgrade3Cost;
+      upgrade4CostDisplay.textContent = upgrade4Cost;
     }
 
     clickButton.addEventListener('click', () => {
@@ -60,53 +81,42 @@
       localStorage.setItem('score', score);
     });
 
-    resetButton.addEventListener('click', () => {
-      score = 0;
-      pointsPerClick = 1;
-      pointsPerSecond = 0;
-      upgrade1Cost = 10;
-      upgrade2Cost = 50;
-      localStorage.clear(); // Clear all saved data
-      loadGame();
-    });
-
-    upgrade1Button.addEventListener('click', () => {
-      if (score >= upgrade1Cost) {
-        score -= upgrade1Cost;
-        pointsPerClick += 1;
-        upgrade1Cost = Math.floor(upgrade1Cost * 1.5);
+    function buyUpgrade(upgradeCost, upgradeAmount, costMultiplier, costDisplay, amountDisplay, increment) {
+      if (score >= upgradeCost) {
+        score -= upgradeCost;
+        pointsPerClick += increment;
+        upgradeCost = Math.floor(upgradeCost * costMultiplier);
         localStorage.setItem('score', score);
-        localStorage.setItem('pointsPerClick', pointsPerClick);
-        localStorage.setItem('upgrade1Cost', upgrade1Cost);
-        upgrade1AmountDisplay.textContent = parseInt(upgrade1AmountDisplay.textContent) + 1;
+        costDisplay.textContent = upgradeCost;
+        amountDisplay.textContent = parseInt(amountDisplay.textContent) + 1;
         scoreDisplay.textContent = score;
-        upgrade1CostDisplay.textContent = upgrade1Cost;
-        localStorage.setItem('upgrade1Amount', upgrade1AmountDisplay.textContent);
+        localStorage.setItem('upgradeAmount', amountDisplay.textContent);
       }
+    }
+
+    // Buy upgrades and set their costs
+    upgrade1Button.addEventListener('click', () => {
+      buyUpgrade(upgrade1Cost, pointsPerClick, 1.5, upgrade1CostDisplay, upgrade1AmountDisplay, 1);
     });
 
     upgrade2Button.addEventListener('click', () => {
-      if (score >= upgrade2Cost) {
-        score -= upgrade2Cost;
-        pointsPerSecond += 5;
-        upgrade2Cost = Math.floor(upgrade2Cost * 1.5);
-        localStorage.setItem('score', score);
-        localStorage.setItem('pointsPerSecond', pointsPerSecond);
-        localStorage.setItem('upgrade2Cost', upgrade2Cost);
-        upgrade2AmountDisplay.textContent = parseInt(upgrade2AmountDisplay.textContent) + 1;
-        scoreDisplay.textContent = score;
-        upgrade2CostDisplay.textContent = upgrade2Cost;
-        localStorage.setItem('upgrade2Amount', upgrade2AmountDisplay.textContent);
-      }
+      buyUpgrade(upgrade2Cost, pointsPerSecond, 1.5, upgrade2CostDisplay, upgrade2AmountDisplay, 5);
+    });
+
+    upgrade3Button.addEventListener('click', () => {
+      buyUpgrade(upgrade3Cost, pointsPerClick, 2, upgrade3CostDisplay, upgrade3AmountDisplay, 10);
+    });
+
+    upgrade4Button.addEventListener('click', () => {
+      buyUpgrade(upgrade4Cost, pointsPerSecond, 2, upgrade4CostDisplay, upgrade4AmountDisplay, 25);
     });
 
     setInterval(() => {
       score += pointsPerSecond;
       scoreDisplay.textContent = score;
-      localStorage.setItem('score', score); // Update score in localStorage
+      localStorage.setItem('score', score);
     }, 1000);
 
-    // Call loadGame to initialize the game state
     loadGame();
   </script>
 </body>
