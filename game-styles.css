@@ -1,113 +1,57 @@
-/* game-styles.css */
-
-/* General body styles */
-body {
+/* Container styles */
+.container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: #f0f8ff; /* Light blue background */
-  font-family: 'Open Sans', sans-serif;
+  align-items: flex-start;
+  gap: 50px;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.main-area {
   text-align: center;
+  flex: 1;
 }
 
-/* Heading styles */
-h1 {
-  font-family: 'Dancing Script', cursive;
-  color: #ff6b6b;
-  margin-bottom: 20px;
-}
-
-/* Score display styles */
-.score {
-  font-size: 2.5em;
-  margin: 20px 0;
-  color: #333;
-}
-
-/* Click button styles */
 .click-button {
-  padding: 20px 40px;
-  font-size: 2em;
-  color: white;
+  padding: 15px 30px;
+  font-size: 20px;
+  margin-top: 20px;
+  cursor: pointer;
   background-color: #ff6b6b;
+  color: white;
   border: none;
   border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
 }
 
 .click-button:hover {
   background-color: #ff4c4c;
-  transform: scale(1.05);
 }
 
-/* Reset button styles */
-.reset-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1em;
-  background-color: #4caf50; /* Green */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.reset-button:hover {
-  background-color: #45a049;
-}
-
-/* Upgrades section styles */
-.upgrades {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 40px;
-  width: 100%;
-  max-width: 600px;
-}
-
-/* Upgrade button styles */
-.upgrade {
-  margin: 10px 0;
-  width: 100%;
-  max-width: 400px;
+/* Upgrades section */
+.upgrades-area {
+  flex: 0.5;
 }
 
 .upgrade-button {
-  padding: 10px 20px;
-  font-size: 1em;
+  display: block;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #6b6bff;
   color: white;
-  background-color: #007bff; /* Blue */
+  margin-bottom: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  width: 100%;
 }
 
 .upgrade-button:hover {
-  background-color: #0056b3;
+  background-color: #4c4cff;
 }
 
-/* Upgrade information styles */
 .upgrade-info {
-  margin-top: 5px;
-  font-size: 0.9em;
-  color: #555;
-}
-
-/* Container styles for a more Cookie Clicker-like layout */
-.container {
-  background-color: #fff;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  width: 90%;
-  max-width: 600px;
-  margin: 20px auto;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 20px;
 }
