@@ -9,41 +9,37 @@
 </head>
 
 <body>
-  <div class="container">
+  <header>
     <h1>Clicker Game!</h1>
-    
+  </header>
+
+  <div class="container">
     <!-- Main Score and Click Button -->
     <div class="main-content">
       <div class="score">Score: <span id="score">0</span></div>
       <button class="click-button" id="clickButton">Click Here!</button>
     </div>
-    
+
     <!-- Upgrades section, aligned to the right -->
     <div class="upgrades">
       <h2>Upgrades</h2>
-      
-      <!-- Upgrade Options -->
+      <!-- Add more upgrades here if needed -->
       <div class="upgrade" id="upgrade1">
         <button class="upgrade-button" onclick="buyUpgrade('upgrade1')">+1 per click (Cost: <span id="upgrade1Cost">10</span>)</button>
         <div class="upgrade-info">Quantity: <span id="upgrade1Amount">0</span></div>
       </div>
-      
       <div class="upgrade" id="upgrade2">
         <button class="upgrade-button" onclick="buyUpgrade('upgrade2')">+5 per second (Cost: <span id="upgrade2Cost">50</span>)</button>
         <div class="upgrade-info">Quantity: <span id="upgrade2Amount">0</span></div>
       </div>
-      
       <div class="upgrade" id="upgrade3">
         <button class="upgrade-button" onclick="buyUpgrade('upgrade3')">+10 per click (Cost: <span id="upgrade3Cost">100</span>)</button>
         <div class="upgrade-info">Quantity: <span id="upgrade3Amount">0</span></div>
       </div>
-      
       <div class="upgrade" id="upgrade4">
         <button class="upgrade-button" onclick="buyUpgrade('upgrade4')">+50 per second (Cost: <span id="upgrade4Cost">500</span>)</button>
         <div class="upgrade-info">Quantity: <span id="upgrade4Amount">0</span></div>
       </div>
-      
-      <!-- Add more upgrades as needed with unique IDs -->
     </div>
   </div>
 
@@ -52,7 +48,6 @@
     let pointsPerClick = parseInt(localStorage.getItem('pointsPerClick')) || 1;
     let pointsPerSecond = parseInt(localStorage.getItem('pointsPerSecond')) || 0;
 
-    // Upgrade data with increasing costs
     const upgrades = {
       upgrade1: { cost: 10, increment: 1, multiplier: 1.5, type: 'click' },
       upgrade2: { cost: 50, increment: 5, multiplier: 1.7, type: 'second' },
@@ -60,7 +55,6 @@
       upgrade4: { cost: 500, increment: 50, multiplier: 2.0, type: 'second' }
     };
 
-    // Load saved game state
     function loadGame() {
       document.getElementById('score').textContent = score;
       for (const upgrade in upgrades) {
@@ -69,13 +63,11 @@
       }
     }
 
-    // Click to gain points
     document.getElementById('clickButton').addEventListener('click', () => {
       score += pointsPerClick;
       updateScore();
     });
 
-    // Upgrade purchase logic
     function buyUpgrade(upgradeId) {
       const upgrade = upgrades[upgradeId];
       if (score >= upgrade.cost) {
@@ -87,7 +79,6 @@
           pointsPerSecond += upgrade.increment;
         }
 
-        // Increase cost and save to localStorage
         upgrade.cost = Math.floor(upgrade.cost * upgrade.multiplier);
         const amountElement = document.getElementById(`${upgradeId}Amount`);
         amountElement.textContent = parseInt(amountElement.textContent) + 1;
@@ -98,7 +89,6 @@
       }
     }
 
-    // Update score display and save to localStorage
     function updateScore() {
       document.getElementById('score').textContent = score;
       localStorage.setItem('score', score);
@@ -106,7 +96,6 @@
       localStorage.setItem('pointsPerSecond', pointsPerSecond);
     }
 
-    // Increment points per second automatically
     setInterval(() => {
       score += pointsPerSecond;
       updateScore();
